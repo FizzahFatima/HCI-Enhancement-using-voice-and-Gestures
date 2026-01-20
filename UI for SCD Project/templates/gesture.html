@@ -1,0 +1,132 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <title>Gesture Mode</title>
+  <link rel="stylesheet" href="../static/style.css">
+</head>
+
+<body>
+  <div class="stage">
+    <header>
+      <div class="logo">G+V</div>
+      <div>
+        <h1>Gesture Mode</h1>
+        <p>Control UI using hand gestures</p>
+      </div>
+    </header>
+
+    <div class="container">
+      {% include 'sidebar.html' %}
+
+      <main class="main">
+        <section id="page-gesture" class="card" aria-hidden="true">
+          <h2 style="margin-top:0">Gesture Mode</h2>
+          <p class="muted">Camera preview on the left — recognized gestures and the mapped actions on the right.</p>
+
+        
+
+          <div class="panel-row" style="margin-top:12px;">
+            <div class="camera-preview" aria-label="Camera preview placeholder">
+              <div class="hint">Camera preview</div>
+              <div class="placeholder">
+                <svg width="84" height="84" viewBox="0 0 24 24" fill="none" style="opacity:0.9">
+                  <path d="M21 15v4a1 1 0 0 1-1 1h-3" stroke="#98a4b3" stroke-width="1.2" stroke-linecap="round"
+                    stroke-linejoin="round" />
+                  <path d="M3 9V5a1 1 0 0 1 1-1h3" stroke="#98a4b3" stroke-width="1.2" stroke-linecap="round"
+                    stroke-linejoin="round" />
+                  <path d="M7 9a5 5 0 0 1 10 0v6a5 5 0 0 1-10 0V9z" stroke="#98a4b3" stroke-width="1.2"
+                    stroke-linecap="round" stroke-linejoin="round" />
+                </svg>
+                <div style="font-size:14px; color:var(--muted); margin-top:6px">Webcam / hand-tracking preview
+                  (placeholder)</div>
+              </div>
+
+              <!-- Start/Stop Buttons -->
+          <div style="margin: 10px 0;">
+
+            <button id="startBtn" class="btn mic-btn">Start Gesture Mode</button>
+            <button id="stopBtn" class="btn mic-btn" style="background:#d9534f;">Stop Gesture Mode</button>
+          </div>
+            </div>
+
+            
+
+            <aside class="right-panel" aria-label="Gesture info">
+              <div class="recognized">
+                <div style="font-weight:700; margin-bottom:8px">Recognized Gesture</div>
+                <div id="gesture-output" style="font-size:18px; color:var(--accent)">— None —</div>
+                <div class="muted" style="margin-top:8px">Status: <span id="gesture-status">Idle</span></div>
+              </div>
+
+              <div class="card" style="padding:12px;">
+                <div style="font-weight:700; margin-bottom:8px">Common gestures</div>
+                <div class="commands-list">
+                  <div class="cmd">
+                    <div>Move Finger</div>
+                    <div class="muted">Cursor Movement</div>
+                  </div>
+                  <div class="cmd">
+                    <div>Pinch</div>
+                    <div class="muted">Click</div>
+                  </div>
+                  <div class="cmd">
+                    <div>Move Hand Upward</div>
+                    <div class="muted">Scroll Up</div>
+                  </div>
+                  <div class="cmd">
+                    <div>Move Hand Downward</div>
+                    <div class="muted">Scroll Down</div>
+                  </div>
+                </div>
+              </div>
+
+            </aside>
+          </div>
+        </section>
+      </main>
+    </div>
+  </div>
+  <script src="https://cdn.socket.io/4.6.1/socket.io.min.js"></script>
+<script>
+    const socket = io();
+
+    const output = document.getElementById("gesture-output");
+    const status = document.getElementById("gesture-status");
+
+    const startBtn = document.getElementById("startBtn");
+    const stopBtn = document.getElementById("stopBtn");
+
+    socket.on("connect", () => console.log("Socket connected"));
+
+    // Start gesture mode
+    startBtn.addEventListener("click", () => {
+      socket.emit("start_gesture");
+      status.textContent = "Starting...";
+    });
+
+    // Stop gesture mode
+    stopBtn.addEventListener("click", () => {
+      socket.emit("stop_gesture");
+      status.textContent = "Stopped";
+      output.textContent = "— None —";
+    });
+
+    // Gesture updates from Python
+    socket.on("gesture_update", data => {
+      output.textContent = data.gesture;
+      status.textContent = data.gesture === "None" ? "Idle" : "Detected";
+    });
+
+    // Status from server
+    socket.on("gesture_status", data => {
+      status.textContent = data.status;
+    });
+  </script>
+
+
+</body>
+
+</html>

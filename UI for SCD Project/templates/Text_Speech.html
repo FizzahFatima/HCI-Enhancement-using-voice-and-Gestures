@@ -1,0 +1,78 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <title>Text To Voice</title>
+  <link rel="stylesheet" href="../static/style.css">
+
+  <style>
+    /* Custom TTS Styling */
+    #ttsText {
+      background: rgba(255, 255, 255, 0.05); 
+      border: 1px solid rgba(255, 255, 255, 0.15);
+      border-radius: 10px;
+      color: var(--accent); /* light green text */
+      outline: none;
+      transition: 0.2s ease;
+    }
+
+    #ttsText:focus {
+      border: 1px solid var(--accent);
+      box-shadow: 0 0 8px rgba(102, 255, 102, 0.5);
+    }
+  </style>
+</head>
+
+<body>
+  <div class="stage">
+    <header>
+      <div class="logo">G+V</div>
+      <div>
+        <h1>Text to Voice</h1>
+        <p>Enter text and hear it spoken aloud</p>
+      </div>
+    </header>
+
+    <div class="container">
+      {% include 'sidebar.html' %}
+
+      <main class="main">
+        <section class="card">
+
+          <h2>Text to Speech Converter</h2>
+          <p class="muted">Type something below and press “Speak”.</p>
+
+          <textarea id="ttsText" class="input"
+            placeholder="Write your text here..."
+            style="width:100%; height:140px; padding:10px; font-size:16px;"></textarea>
+
+          
+          <button class=" btn mic-btn" id="speakBtn">Speak
+                </button>
+
+        </section>
+      </main>
+    </div>
+  </div>
+
+  <script>
+    document.getElementById("speakBtn").addEventListener("click", () => {
+      const text = document.getElementById("ttsText").value.trim();
+
+      if (text.length === 0) {
+        alert("Please enter some text!");
+        return;
+      }
+
+      const utter = new SpeechSynthesisUtterance(text);
+      utter.rate = 1;   // speed
+      utter.pitch = 1;  // tone
+      speechSynthesis.speak(utter);
+    });
+  </script>
+
+</body>
+
+</html>

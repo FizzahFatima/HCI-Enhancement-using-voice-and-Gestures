@@ -1,0 +1,75 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <title>Home — Gesture & Voice UI</title>
+  <link rel="stylesheet" href="../static/style.css">
+</head>
+
+<body>
+  <div class="stage">
+    <header>
+      <div class="logo">G+V</div>
+      <div>
+        <h1>Gesture & Voice Interaction — Prototype</h1>
+        <p>Exploring multimodal interaction — Gesture, Voice & TTS modes</p>
+      </div>
+    </header>
+
+    <div class="container">
+      {% include 'sidebar.html' %}
+
+      <main class="main">
+        <section id="page-index" class="card" aria-hidden="false">
+          <h2 style="margin-top:0">Welcome</h2>
+          <p class="muted">Choose how you want to interact — using gestures, voice commands, 
+                            or text-to-speech tools designed for accessibility and ease..</p>
+
+          <div class="home-grid" style="margin-top:12px;">
+            <div class="big-btn" onclick="switchPage('gesture')">
+              <div style="font-size:18px; margin-bottom:8px">🎥 Gesture Mode</div>
+              <div class="muted">Use your hand gestures to control the interface through the camera</div>
+            </div>
+
+            <div class="big-btn" onclick="switchPage('voice')">
+              <div style="font-size:18px; margin-bottom:8px">🎤 Voice Mode</div>
+              <div class="muted">Talk to the system and watch your spoken words appear instantly as text</div>
+            </div>
+
+            <div class="big-btn" onclick="switchPage('Text_Speech')">
+              <div style="font-size:18px; margin-bottom:8px">🔀 TTS Mode</div>
+              <div class="muted">Type text and let the system read it aloud for you</div>
+            </div>
+
+            <div class="big-btn" onclick="switchPage('settings')">
+              <div style="font-size:18px; margin-bottom:8px">⚙️ Settings</div>
+              <div class="muted">Customize gestures, voice commands, and accessibility options</div>
+            </div>
+          </div>
+        </section>
+      </main>
+    </div>
+  </div>
+  <script src="../static/script.js"></script>
+  <script>
+  function switchPage(mode) {
+    if (mode === "gesture") {
+      window.location.href = "/gesture";
+    } 
+    else if (mode === "voice") {
+      window.location.href = "/voice";
+    } 
+    else if (mode === "Text_Speech") {
+      window.location.href = "/Text_Speech";  // replace this later since hybrid removed
+    } 
+    else if (mode === "settings") {
+      window.location.href = "/settings"; // or /help if changed
+    }
+  }
+</script>
+
+</body>
+
+</html>

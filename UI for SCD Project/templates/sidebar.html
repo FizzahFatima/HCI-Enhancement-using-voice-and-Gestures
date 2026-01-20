@@ -1,0 +1,62 @@
+<nav class="sidebar" aria-label="Main navigation">
+    <a href="{{ url_for('home') }}" id="btn-home" class="mode-btn {% if request.endpoint == 'home' %}active{% endif %}">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor">
+            <path d="M3 11.5L12 4l9 7.5V20a1 1 0 0 1-1 1h-5v-6H9v6H4a1 1 0 0 1-1-1V11.5z" stroke-width="1.2" stroke-linecap="round" stroke-linejoin="round"/>
+        </svg>
+        <div>
+            <div style="font-weight:600">Home</div>
+            <div style="font-size:13px; color:var(--muted)">Overview & modes</div>
+        </div>
+    </a>
+
+    <a href="{{ url_for('gesture') }}" id="btn-gesture" class="mode-btn {% if request.endpoint == 'gesture' %}active{% endif %}">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor">
+            <path d="M12 2v10" stroke-width="1.2" stroke-linecap="round" stroke-linejoin="round"/>
+            <path d="M6 12v6" stroke-width="1.2" stroke-linecap="round" stroke-linejoin="round"/>
+            <path d="M18 12v4" stroke-width="1.2" stroke-linecap="round" stroke-linejoin="round"/>
+        </svg>
+        <div>
+            <div style="font-weight:600">Gesture Mode</div>
+            <div style="font-size:13px; color:var(--muted)">Camera preview & gestures</div>
+        </div>
+    </a>
+
+    <a href="{{ url_for('voice') }}" id="btn-voice" class="mode-btn {% if request.endpoint == 'voice' %}active{% endif %}">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor">
+            <path d="M12 2v12" stroke-width="1.2" stroke-linecap="round" stroke-linejoin="round"/>
+            <path d="M19 11a7 7 0 0 1-14 0" stroke-width="1.2" stroke-linecap="round" stroke-linejoin="round"/>
+        </svg>
+        <div>
+            <div style="font-weight:600">Voice Mode</div>
+            <div style="font-size:13px; color:var(--muted)">Speech-to-command</div>
+        </div>
+    </a>
+
+    <a href="{{ url_for('Text_Speech') }}" id="btn-hybrid" class="mode-btn {% if request.endpoint == 'Text_Speech' %}active{% endif %}">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor">
+            <path d="M3 12h8" stroke-width="1.2" stroke-linecap="round" stroke-linejoin="round"/>
+            <path d="M13 6h8" stroke-width="1.2" stroke-linecap="round" stroke-linejoin="round"/>
+            <path d="M13 18h8" stroke-width="1.2" stroke-linecap="round" stroke-linejoin="round"/>
+        </svg>
+        <div>
+            <div style="font-weight:600">TTS Mode</div>
+            <div style="font-size:13px; color:var(--muted)">Text-to-Speech </div>
+        </div>
+    </a>
+
+    <a href="{{ url_for('settings') }}" id="btn-settings" class="mode-btn {% if request.endpoint == 'settings' %}active{% endif %}">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor">
+            <path d="M12 15.5a3.5 3.5 0 1 0 0-7 3.5 3.5 0 0 0 0 7z" stroke-width="1.2" stroke-linecap="round" stroke-linejoin="round"/>
+        </svg>
+        <div>
+            <div style="font-weight:600">Help</div>
+            <div style="font-size:13px; color:var(--muted)">Accessibility & mapping</div>
+        </div>
+    </a>
+
+    <div class="sidebar-foot">
+        <div style="font-weight:600; margin-bottom:6px">Project</div>
+        <div class="muted">Gesture & Voice Interaction</div>
+        <div style="font-size:12px; margin-top:8px" class="muted">Submitted by: Zunera Kamran & Fizzah Fatima</div>
+    </div>
+</nav>
